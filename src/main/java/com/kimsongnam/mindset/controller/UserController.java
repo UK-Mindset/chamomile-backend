@@ -49,4 +49,10 @@ public class UserController {
     public void SignUpGender(@RequestBody @Valid SignUpUserGenderRequest signUpUserGenderRequest) {
         userService.SignUpGender(signUpUserGenderRequest);
     }
+
+    @PostMapping("/login")
+    public User LoginUser(@RequestBody @Valid LoginRequest loginRequest, BindingResult bindingResult){
+        return userService.LoginUser(loginRequest, bindingResult);
+    }
+
 }

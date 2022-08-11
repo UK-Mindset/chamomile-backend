@@ -90,6 +90,20 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
+    public User LoginUser(LoginRequest loginRequest, BindingResult bindingResult){
+        formValidation(bindingResult);
+
+        User user = userRepository.findByUserEmail(loginRequest.getUserEmail()).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다"));
+
+        if(!passwordEncoder.matches(loginRequest.getUserPassword(), user.getUserPassword())){
+            throw new ForbiddenException("회원 정보가 일치하지 않습니다.");
+        }
+
+        return user;
+
+    }
+
     public void formValidation(BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new BadRequesetException("유효하지 않은 형식의 값입니다.");
