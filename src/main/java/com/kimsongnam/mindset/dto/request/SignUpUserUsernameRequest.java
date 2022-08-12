@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class SignUpUserNicknameRequest {
+public class SignUpUserUsernameRequest {
     @NotEmpty
-    private String userNickname;
+    private String userUsername;
 }
