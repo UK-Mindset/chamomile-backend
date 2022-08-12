@@ -20,7 +20,7 @@ public class SignUpRequest {
 
     private String userPassword;
 
-    private String userNickname;
+    private String userUsername;
 
     private String userPhone;
 

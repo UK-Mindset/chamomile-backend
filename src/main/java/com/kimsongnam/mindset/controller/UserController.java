@@ -30,9 +30,9 @@ public class UserController {
         userService.SignUpPassword(signUpUserPasswordRequest, bindingResult);
     }
 
-    @PostMapping("/signup/nickname")
-    public void SignUpNickname(@RequestBody @Valid SignUpUserNicknameRequest signUpUserNicknameRequest, BindingResult bindingResult) {
-        userService.SignUpNickname(signUpUserNicknameRequest, bindingResult);
+    @PostMapping("/signup/username")
+    public void SignUpUsername(@RequestBody @Valid SignUpUserUsernameRequest signUpUserUsernameRequest, BindingResult bindingResult) {
+        userService.SignUpUserName(signUpUserUsernameRequest, bindingResult);
     }
 
     @PostMapping("/signup/phone")

@@ -47,14 +47,14 @@ public class UserService {
         tempUser.setUserPassword(encodePassword);
     }
 
-    public void SignUpNickname(SignUpUserNicknameRequest signUpUserNicknameRequest, BindingResult bindingResult){
+    public void SignUpUserName(SignUpUserUsernameRequest signUpUserUsernameRequest, BindingResult bindingResult){
         formValidation(bindingResult);
 
-        if(userRepository.existsByUserNickname(signUpUserNicknameRequest.getUserNickname())){
+        if(userRepository.existsByUserUsername(signUpUserUsernameRequest.getUserUsername())){
             throw new ConflictException("이미 존재하는 별명입니다.");
         }
 
-        tempUser.setUserNickname(signUpUserNicknameRequest.getUserNickname());
+        tempUser.setUserUsername(signUpUserUsernameRequest.getUserUsername());
     }
 
     public void SignUpPhone(SignUpUserPhoneRequest signUpUserPhoneRequest){
@@ -81,7 +81,7 @@ public class UserService {
                         .userLastName(tempUser.getUserLastName())
                         .userEmail(tempUser.getUserEmail())
                         .userPassword(tempUser.getUserPassword())
-                        .userNickname(tempUser.getUserNickname())
+                        .userUsername(tempUser.getUserUsername())
                         .userPhone(tempUser.getUserPhone())
                         .userBirth(tempUser.getUserBirth())
                         .userGender(tempUser.getUserGender())
