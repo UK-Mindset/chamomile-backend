@@ -21,14 +21,14 @@ public class Mood {
     @Column(name="mood", length = 20, nullable = false)
     private String mood;
 
-    @Column(name="mood_what", length = 20, nullable = false)
-    private String moodWhat;
+    @Column(name="mood_situation", length = 20, nullable = false)
+    private String moodSituation;
 
     @Column(name="mood_title", length=30)
     private String moodTitle;
 
-    @Column(name="mood_why", length=150)
-    private String moodWhy;
+    @Column(name="mood_reason", length=150)
+    private String moodReason;
 
     @Column(name="mood_date")
     private LocalDateTime moodDate;
