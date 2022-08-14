@@ -1,13 +1,11 @@
 package com.kimsongnam.mindset.controller;
 
 import com.kimsongnam.mindset.dto.request.AddMoodRequest;
+import com.kimsongnam.mindset.dto.request.DeleteMoodRequest;
 import com.kimsongnam.mindset.service.MoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -20,5 +18,10 @@ public class MoodController {
     @PostMapping("/add")
     public void AddMood(@RequestBody @Valid AddMoodRequest addMoodRequest, BindingResult bindingResult){
         moodService.AddMood(addMoodRequest, bindingResult);
+    }
+
+    @DeleteMapping("/delete")
+    public void DeleteMood(@RequestParam long moodId, @Valid @RequestBody DeleteMoodRequest deleteMoodRequest){
+        moodService.DeleteMood(moodId, deleteMoodRequest);
     }
 }
