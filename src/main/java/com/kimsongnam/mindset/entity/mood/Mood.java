@@ -18,10 +18,12 @@ public class Mood {
     @Column(name="moodId")
     private Long moodId;
 
-    @Column(name="mood_category", length = 20, nullable = false)
+    @Column(name="mood_category", nullable = false, columnDefinition = "CHAR(20)")
+    @Enumerated(EnumType.STRING)
     private MoodCategory moodCategory;
 
-    @Column(name="mood_situation", length = 20, nullable = false)
+    @Column(name="mood_situation", nullable = false, columnDefinition = "CHAR(20)")
+    @Enumerated(EnumType.STRING)
     private MoodSituation moodSituation;
 
     @Column(name="mood_title", length=30)
