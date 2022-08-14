@@ -18,11 +18,11 @@ public class Mood {
     @Column(name="moodId")
     private Long moodId;
 
-    @Column(name="mood", length = 20, nullable = false)
-    private String mood;
+    @Column(name="mood_category", length = 20, nullable = false)
+    private MoodCategory moodCategory;
 
     @Column(name="mood_situation", length = 20, nullable = false)
-    private String moodSituation;
+    private MoodSituation moodSituation;
 
     @Column(name="mood_title", length=30)
     private String moodTitle;
