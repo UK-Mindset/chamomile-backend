@@ -4,7 +4,7 @@ import com.kimsongnam.mindset.entity.user.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="MOOD_TB")
@@ -33,7 +33,7 @@ public class Mood {
     private String moodReason;
 
     @Column(name="mood_date")
-    private LocalDateTime moodDate;
+    private LocalDate moodDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
