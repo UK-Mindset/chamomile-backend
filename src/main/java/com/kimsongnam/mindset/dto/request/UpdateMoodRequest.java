@@ -16,4 +16,6 @@ public class UpdateMoodRequest {
     private String moodTitle;
 
     private String moodReason;
+
+    private String moodDate;
 }

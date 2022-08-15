@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -94,7 +96,19 @@ public class MoodService {
         if(updateMoodRequest.getMoodReason().isEmpty()){
             moodReason = mood.getMoodReason();
         }
-        mood.updateMood(moodTitle, moodReason);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(updateMoodRequest.getMoodDate(), formatter);
+        } catch (Exception e) {
+            throw new BadRequesetException("잘못된 형식입니다.");
+        }
+
+        LocalTime time = mood.getMoodDate().toLocalTime();
+        LocalDateTime localDateTime = localDate.atTime(time);
+
+        mood.updateMood(moodTitle, moodReason, localDateTime);
     }
 
     @Transactional
