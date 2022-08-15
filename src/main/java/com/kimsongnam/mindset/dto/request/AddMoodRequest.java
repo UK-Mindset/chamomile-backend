@@ -1,9 +1,12 @@
 package com.kimsongnam.mindset.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.kimsongnam.mindset.entity.mood.MoodCategory;
+import com.kimsongnam.mindset.entity.mood.MoodSituation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -11,12 +14,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class AddMoodRequest {
     @NotNull
-    private String moodCategory;
+    private MoodCategory moodCategory;
 
     @NotNull
-    private String moodSituation;
+    private MoodSituation moodSituation;
 
     private String moodTitle;
 

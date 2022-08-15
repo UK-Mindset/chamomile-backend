@@ -1,8 +1,6 @@
 package com.kimsongnam.mindset.service;
 
-import com.kimsongnam.mindset.dto.request.AddMoodRequest;
-import com.kimsongnam.mindset.dto.request.DeleteMoodRequest;
-import com.kimsongnam.mindset.dto.request.UpdateMoodRequest;
+import com.kimsongnam.mindset.dto.request.*;
 import com.kimsongnam.mindset.entity.mood.Mood;
 import com.kimsongnam.mindset.entity.mood.MoodCategory;
 import com.kimsongnam.mindset.entity.mood.MoodSituation;
@@ -17,33 +15,48 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import static java.time.LocalDateTime.now;
 
 @Service
 @RequiredArgsConstructor
 public class MoodService {
     private final MoodRepository moodRepository;
     private final UserRepository userRepository;
+    private static AddMoodRequest tempMood;
 
     @Transactional
-    public void AddMood(AddMoodRequest addMoodRequest, BindingResult bindingResult){
+    public void AddMoodCategory(AddMoodCategoryRequest addMoodCategoryRequest, BindingResult bindingResult){
         formValidation(bindingResult);
-        User user = findUser(addMoodRequest.getUserId());
-        MoodCategory category = enumCategoryValid(addMoodRequest.getMoodCategory());
-        MoodSituation situation = enumSituationValid(addMoodRequest.getMoodSituation());
+        tempMood = new AddMoodRequest();
+        MoodCategory category = enumCategoryValid(addMoodCategoryRequest.getMoodCategory());
+        tempMood.setMoodCategory(category);
+    }
 
+    @Transactional
+    public void AddMoodSituation(AddMoodSituationRequest addMoodSituationRequest, BindingResult bindingResult){
+        formValidation(bindingResult);
+        MoodSituation situation = enumSituationValid(addMoodSituationRequest.getMoodSituation());
+        tempMood.setMoodSituation(situation);
+    }
 
-        LocalTime now = LocalTime.now();
-        LocalDateTime dateTime = addMoodRequest.getMoodDate().atTime(now);
+    @Transactional
+    public void AddMoodContent(AddMoodContentRequest addMoodContentRequest, BindingResult bindingResult){
+        formValidation(bindingResult);
+        tempMood.setMoodTitle(addMoodContentRequest.getMoodTitle());
+        tempMood.setMoodReason(addMoodContentRequest.getMoodReason());
+
+        User user = findUser(addMoodContentRequest.getUserId());
+
+//        LocalTime now = LocalTime.now();
+//        LocalDateTime dateTime = addMoodContentRequest.getMoodDate().atTime(now);
 
         Mood mood = Mood.builder()
-                        .moodCategory(category)
-                        .moodSituation(situation)
-                        .moodTitle(addMoodRequest.getMoodTitle())
-                        .moodReason(addMoodRequest.getMoodReason())
-                        .moodDate(dateTime)
-                        .userId(user)
+                .moodCategory(tempMood.getMoodCategory())
+                .moodSituation(tempMood.getMoodSituation())
+                .moodTitle(tempMood.getMoodTitle())
+                .moodReason(tempMood.getMoodReason())
+                .moodDate(now())
+                .userId(user)
                 .build();
 
         moodRepository.save(mood);
