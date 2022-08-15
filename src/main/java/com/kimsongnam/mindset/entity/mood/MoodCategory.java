@@ -6,6 +6,14 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum MoodCategory {
+    HAPPY,
+    SAD,
+    ANGRY,
+    WORRIED,
+    CONFUSE,
+    EXCITED,
+    SURPRISED,
+    TIRED,
     BORED,
     ANXIOUS,
     IN_LOVE,
@@ -16,7 +24,7 @@ public enum MoodCategory {
     HUNGRY,
     SICK,
     EMBARRASSED,
-    CONFUSE,
+    NERVOUS,
     COOL,
     QUIET,
     FUNNY,
