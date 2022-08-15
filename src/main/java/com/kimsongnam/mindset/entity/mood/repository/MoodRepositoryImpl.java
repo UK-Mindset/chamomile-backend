@@ -28,7 +28,7 @@ public class MoodRepositoryImpl extends QuerydslRepositorySupport implements Moo
                         QMood.mood.moodCategory
                 ))
                 .from(QMood.mood)
-                .where(QMood.mood.moodDate.year().eq(date.getYear()),QMood.mood.moodDate.month().eq(date.getMonthValue()), QMood.mood.moodDate.dayOfMonth().eq(date.getDayOfMonth()), QMood.mood.userId.userId.eq(userId.getUserId()))
+                .where(QMood.mood.moodDate.year().eq(date.getYear()),QMood.mood.moodDate.month().eq(date.getMonthValue()), QMood.mood.userId.userId.eq(userId.getUserId()))
                 .groupBy(QMood.mood.moodCategory)
                 .orderBy(QMood.mood.moodCategory.count().desc())
                 .fetch();
