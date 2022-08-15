@@ -1,6 +1,7 @@
 package com.kimsongnam.mindset.service;
 
 import com.kimsongnam.mindset.dto.request.*;
+import com.kimsongnam.mindset.dto.response.RankMoodResponse;
 import com.kimsongnam.mindset.entity.mood.Mood;
 import com.kimsongnam.mindset.entity.mood.MoodCategory;
 import com.kimsongnam.mindset.entity.mood.MoodSituation;
@@ -14,6 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static java.time.LocalDateTime.now;
 
@@ -89,6 +94,22 @@ public class MoodService {
             moodReason = mood.getMoodReason();
         }
         mood.updateMood(moodTitle, moodReason);
+    }
+
+    @Transactional
+    public List<RankMoodResponse> RankMood(long userId, RankMoodRequest rankMoodRequest, BindingResult bindingResult){
+        formValidation(bindingResult);
+        User user = findUser(userId);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(rankMoodRequest.getMoodDate(), formatter);
+        } catch (Exception e) {
+            throw new BadRequesetException("잘못된 형식입니다.");
+        }
+
+        return moodRepository.findMoodAllByUserId(user, localDate);
     }
 
     public void formValidation(BindingResult bindingResult){
