@@ -3,6 +3,7 @@ package com.kimsongnam.mindset.entity.user;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -36,8 +37,8 @@ public class User {
     private String userPhone;
 
     @Column(name="user_birth")
-    private LocalDateTime userBirth;
+    private LocalDate userBirth;
 
     @Column(name="user_gender")
-    private String userGender;
+    private UserGender userGender;
 }
