@@ -40,8 +40,9 @@ public class Mood {
     @JoinColumn(name = "user_id")
     private User userId;
 
-    public void updateMood(String moodTitle, String moodReason){
+    public void updateMood(String moodTitle, String moodReason, LocalDateTime moodDate){
         this.moodTitle = moodTitle;
         this.moodReason = moodReason;
+        this.moodDate = moodDate;
     }
 }
