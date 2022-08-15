@@ -1,6 +1,7 @@
 package com.kimsongnam.mindset.service;
 
 import com.kimsongnam.mindset.dto.request.*;
+import com.kimsongnam.mindset.dto.response.OnedayMoodResponse;
 import com.kimsongnam.mindset.dto.response.RankMoodResponse;
 import com.kimsongnam.mindset.entity.mood.Mood;
 import com.kimsongnam.mindset.entity.mood.MoodCategory;
@@ -54,9 +55,6 @@ public class MoodService {
         tempMood.setMoodReason(addMoodContentRequest.getMoodReason());
 
         User user = findUser(addMoodContentRequest.getUserId());
-
-//        LocalTime now = LocalTime.now();
-//        LocalDateTime dateTime = addMoodContentRequest.getMoodDate().atTime(now);
 
         Mood mood = Mood.builder()
                 .moodCategory(tempMood.getMoodCategory())
@@ -125,6 +123,22 @@ public class MoodService {
         }
 
         return moodRepository.findMoodAllByUserId(user, yearMonth);
+    }
+
+    @Transactional
+    public List<OnedayMoodResponse> OnedayMood(long userId, OnedayMoodRequest onedayMoodRequest, BindingResult bindingResult){
+        formValidation(bindingResult);
+        User user = findUser(userId);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(onedayMoodRequest.getMoodDate(), formatter);
+        } catch (Exception e) {
+            throw new BadRequesetException("잘못된 형식입니다.");
+        }
+
+        return moodRepository.findOnedayMoodResponses(user, localDate);
     }
 
     public void formValidation(BindingResult bindingResult){
