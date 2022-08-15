@@ -2,6 +2,7 @@ package com.kimsongnam.mindset.service;
 
 import com.kimsongnam.mindset.dto.request.AddMoodRequest;
 import com.kimsongnam.mindset.dto.request.DeleteMoodRequest;
+import com.kimsongnam.mindset.dto.request.UpdateMoodRequest;
 import com.kimsongnam.mindset.entity.mood.Mood;
 import com.kimsongnam.mindset.entity.mood.MoodCategory;
 import com.kimsongnam.mindset.entity.mood.MoodSituation;
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 @Service
 @RequiredArgsConstructor
 public class MoodService {
@@ -29,12 +33,16 @@ public class MoodService {
         MoodCategory category = enumCategoryValid(addMoodRequest.getMoodCategory());
         MoodSituation situation = enumSituationValid(addMoodRequest.getMoodSituation());
 
+
+        LocalTime now = LocalTime.now();
+        LocalDateTime dateTime = addMoodRequest.getMoodDate().atTime(now);
+
         Mood mood = Mood.builder()
                         .moodCategory(category)
                         .moodSituation(situation)
                         .moodTitle(addMoodRequest.getMoodTitle())
                         .moodReason(addMoodRequest.getMoodReason())
-                        .moodDate(addMoodRequest.getMoodDate())
+                        .moodDate(dateTime)
                         .userId(user)
                 .build();
 
@@ -42,12 +50,32 @@ public class MoodService {
     }
 
     @Transactional
-    public void DeleteMood(long moodId, DeleteMoodRequest deleteMoodRequest){
+    public void DeleteMood(long moodId, DeleteMoodRequest deleteMoodRequest, BindingResult bindingResult){
         Mood mood = findMood(moodId);
+        formValidation(bindingResult);
         if(mood.getUserId().getUserId()!= deleteMoodRequest.getUserId()){
             throw new ForbiddenException("삭제 권한이 없습니다.");
         }
         moodRepository.deleteById(moodId);
+    }
+
+    @Transactional
+    public void UpdateMood(long moodId, UpdateMoodRequest updateMoodRequest, BindingResult bindingResult){
+        Mood mood = findMood(moodId);
+        formValidation(bindingResult);
+        if(mood.getUserId().getUserId()!= updateMoodRequest.getUserId()){
+            throw new ForbiddenException("수정 권한이 없습니다.");
+        }
+
+        String moodTitle = updateMoodRequest.getMoodTitle();
+        String moodReason = updateMoodRequest.getMoodReason();
+        if(updateMoodRequest.getMoodTitle().isEmpty()){
+            moodTitle = mood.getMoodTitle();
+        }
+        if(updateMoodRequest.getMoodReason().isEmpty()){
+            moodReason = mood.getMoodReason();
+        }
+        mood.updateMood(moodTitle, moodReason);
     }
 
     public void formValidation(BindingResult bindingResult){
