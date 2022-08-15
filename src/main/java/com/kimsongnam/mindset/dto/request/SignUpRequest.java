@@ -1,11 +1,12 @@
 package com.kimsongnam.mindset.dto.request;
 
+import com.kimsongnam.mindset.entity.user.UserGender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +25,7 @@ public class SignUpRequest {
 
     private String userPhone;
 
-    private LocalDateTime userBirth;
+    private LocalDate userBirth;
 
-    private String userGender;
+    private UserGender userGender;
 }

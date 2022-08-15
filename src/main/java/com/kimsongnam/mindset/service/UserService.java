@@ -1,7 +1,9 @@
 package com.kimsongnam.mindset.service;
 
 import com.kimsongnam.mindset.dto.request.*;
+import com.kimsongnam.mindset.entity.mood.MoodCategory;
 import com.kimsongnam.mindset.entity.user.User;
+import com.kimsongnam.mindset.entity.user.UserGender;
 import com.kimsongnam.mindset.entity.user.repository.UserRepository;
 import com.kimsongnam.mindset.exception.BadRequesetException;
 import com.kimsongnam.mindset.exception.ConflictException;
@@ -12,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @RequiredArgsConstructor
@@ -68,12 +73,21 @@ public class UserService {
     }
 
     public void SignUpBirth(SignUpUserBirthRequest signUpUserBirthRequest){
-        tempUser.setUserBirth(signUpUserBirthRequest.getUserBirth());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(signUpUserBirthRequest.getUserBirth(), formatter);
+        } catch (Exception e) {
+            throw new BadRequesetException("잘못된 형식입니다.");
+        }
+        tempUser.setUserBirth(localDate);
     }
+
     @Transactional
     public void SignUpGender(SignUpUserGenderRequest signUpUserGenderRequest) {
+        UserGender userGender = enumGenderValid(signUpUserGenderRequest.getUserGender());
         if (!signUpUserGenderRequest.getUserGender().isEmpty()) {
-            tempUser.setUserGender(signUpUserGenderRequest.getUserGender());
+            tempUser.setUserGender(userGender);
         }
 
         User user = User.builder()
@@ -107,6 +121,14 @@ public class UserService {
     public void formValidation(BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new BadRequesetException("유효하지 않은 형식의 값입니다.");
+        }
+    }
+
+    public UserGender enumGenderValid(String userGender) {
+        try {
+            return UserGender.valueOf(userGender);
+        } catch (Exception e) {
+            throw new NotFoundException("존재하지 않는 성별입니다.");
         }
     }
 }
