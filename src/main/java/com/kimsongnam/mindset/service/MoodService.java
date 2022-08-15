@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -101,15 +102,15 @@ public class MoodService {
         formValidation(bindingResult);
         User user = findUser(userId);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        YearMonth yearMonth;
         try {
-            localDate = LocalDate.parse(rankMoodRequest.getMoodDate(), formatter);
+            yearMonth = YearMonth.parse(rankMoodRequest.getMoodDate(), formatter);
         } catch (Exception e) {
             throw new BadRequesetException("잘못된 형식입니다.");
         }
 
-        return moodRepository.findMoodAllByUserId(user, localDate);
+        return moodRepository.findMoodAllByUserId(user, yearMonth);
     }
 
     public void formValidation(BindingResult bindingResult){

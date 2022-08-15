@@ -9,6 +9,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 public class MoodRepositoryImpl extends QuerydslRepositorySupport implements MoodRepositoryExtension{
@@ -21,7 +22,7 @@ public class MoodRepositoryImpl extends QuerydslRepositorySupport implements Moo
     }
 
     @Override
-    public List<RankMoodResponse> findMoodAllByUserId(User userId, LocalDate date) {
+    public List<RankMoodResponse> findMoodAllByUserId(User userId, YearMonth date) {
         return queryFactory
                 .select(Projections.constructor(
                         RankMoodResponse.class,
