@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="MOOD_TB")
@@ -33,9 +34,14 @@ public class Mood {
     private String moodReason;
 
     @Column(name="mood_date")
-    private LocalDate moodDate;
+    private LocalDateTime moodDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User userId;
+
+    public void updateMood(String moodTitle, String moodReason){
+        this.moodTitle = moodTitle;
+        this.moodReason = moodReason;
+    }
 }

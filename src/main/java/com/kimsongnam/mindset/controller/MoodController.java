@@ -2,6 +2,7 @@ package com.kimsongnam.mindset.controller;
 
 import com.kimsongnam.mindset.dto.request.AddMoodRequest;
 import com.kimsongnam.mindset.dto.request.DeleteMoodRequest;
+import com.kimsongnam.mindset.dto.request.UpdateMoodRequest;
 import com.kimsongnam.mindset.service.MoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
@@ -21,7 +22,12 @@ public class MoodController {
     }
 
     @DeleteMapping("/delete")
-    public void DeleteMood(@RequestParam long moodId, @Valid @RequestBody DeleteMoodRequest deleteMoodRequest){
-        moodService.DeleteMood(moodId, deleteMoodRequest);
+    public void DeleteMood(@RequestParam long moodId, @Valid @RequestBody DeleteMoodRequest deleteMoodRequeset, BindingResult bindingResult){
+        moodService.DeleteMood(moodId, deleteMoodRequeset, bindingResult);
+    }
+
+    @PutMapping("/update")
+    public void UpdateMood(@RequestParam long moodId, @Valid @RequestBody UpdateMoodRequest updateMoodRequest, BindingResult bindingResult){
+        moodService.UpdateMood(moodId, updateMoodRequest, bindingResult);
     }
 }
