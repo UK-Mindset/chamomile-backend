@@ -1,6 +1,7 @@
 package com.kimsongnam.mindset.controller;
 
 import com.kimsongnam.mindset.dto.request.*;
+import com.kimsongnam.mindset.dto.response.OnedayMoodResponse;
 import com.kimsongnam.mindset.dto.response.RankMoodResponse;
 import com.kimsongnam.mindset.service.MoodService;
 import lombok.RequiredArgsConstructor;
@@ -44,5 +45,10 @@ public class MoodController {
     @GetMapping("/rank")
     public List<RankMoodResponse> RankMood(@RequestParam long userId, @Valid @RequestBody RankMoodRequest rankMoodRequest, BindingResult bindingResult){
         return moodService.RankMood(userId, rankMoodRequest, bindingResult);
+    }
+
+    @GetMapping("/oneday")
+    public List<OnedayMoodResponse> OnedayMood(@RequestParam long userId, @Valid @RequestBody OnedayMoodRequest onedayMoodRequest, BindingResult bindingResult){
+        return moodService.OnedayMood(userId, onedayMoodRequest, bindingResult);
     }
 }
