@@ -1,8 +1,6 @@
 package com.kimsongnam.mindset.controller;
 
-import com.kimsongnam.mindset.dto.request.AddMoodRequest;
-import com.kimsongnam.mindset.dto.request.DeleteMoodRequest;
-import com.kimsongnam.mindset.dto.request.UpdateMoodRequest;
+import com.kimsongnam.mindset.dto.request.*;
 import com.kimsongnam.mindset.service.MoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
@@ -16,9 +14,19 @@ import javax.validation.Valid;
 public class MoodController {
     private final MoodService moodService;
 
-    @PostMapping("/add")
-    public void AddMood(@RequestBody @Valid AddMoodRequest addMoodRequest, BindingResult bindingResult){
-        moodService.AddMood(addMoodRequest, bindingResult);
+    @PostMapping("/add-category")
+    public void AddMoodCategory(@RequestBody @Valid AddMoodCategoryRequest addMoodCategoryRequest, BindingResult bindingResult){
+        moodService.AddMoodCategory(addMoodCategoryRequest, bindingResult);
+    }
+
+    @PostMapping("/add-situation")
+    public void AddMoodSituation(@RequestBody @Valid AddMoodSituationRequest addMoodSituationRequest, BindingResult bindingResult){
+        moodService.AddMoodSituation(addMoodSituationRequest, bindingResult);
+    }
+
+    @PostMapping("/add-content")
+    public void AddMoodContent(@RequestBody @Valid AddMoodContentRequest addMoodContentRequest, BindingResult bindingResult){
+        moodService.AddMoodContent(addMoodContentRequest, bindingResult);
     }
 
     @DeleteMapping("/delete")
