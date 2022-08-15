@@ -1,12 +1,14 @@
 package com.kimsongnam.mindset.controller;
 
 import com.kimsongnam.mindset.dto.request.*;
+import com.kimsongnam.mindset.dto.response.RankMoodResponse;
 import com.kimsongnam.mindset.service.MoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,5 +39,10 @@ public class MoodController {
     @PutMapping("/update")
     public void UpdateMood(@RequestParam long moodId, @Valid @RequestBody UpdateMoodRequest updateMoodRequest, BindingResult bindingResult){
         moodService.UpdateMood(moodId, updateMoodRequest, bindingResult);
+    }
+
+    @GetMapping("/rank")
+    public List<RankMoodResponse> RankMood(@RequestParam long userId, @Valid @RequestBody RankMoodRequest rankMoodRequest, BindingResult bindingResult){
+        return moodService.RankMood(userId, rankMoodRequest, bindingResult);
     }
 }
