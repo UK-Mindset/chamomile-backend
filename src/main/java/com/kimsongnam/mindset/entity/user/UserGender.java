@@ -8,5 +8,6 @@ import lombok.Getter;
 public enum UserGender {
     WOMEN,
     MEN,
+    SPECIFY_ANOTHER,
     NONE
 }

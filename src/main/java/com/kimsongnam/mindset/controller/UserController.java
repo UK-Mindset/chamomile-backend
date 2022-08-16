@@ -55,4 +55,8 @@ public class UserController {
         return userService.LoginUser(loginRequest, bindingResult);
     }
 
+    @PutMapping("/update")
+    public void UpdateUser(@RequestParam long userId, @RequestBody @Valid UpdateUserRequest updateUserRequest, BindingResult bindingResult){
+        userService.UpdateUser(userId, updateUserRequest, bindingResult);
+    }
 }

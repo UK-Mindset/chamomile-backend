@@ -1,7 +1,6 @@
 package com.kimsongnam.mindset.service;
 
 import com.kimsongnam.mindset.dto.request.*;
-import com.kimsongnam.mindset.entity.mood.MoodCategory;
 import com.kimsongnam.mindset.entity.user.User;
 import com.kimsongnam.mindset.entity.user.UserGender;
 import com.kimsongnam.mindset.entity.user.repository.UserRepository;
@@ -118,6 +117,42 @@ public class UserService {
 
     }
 
+    @Transactional
+    public void UpdateUser(long userId, UpdateUserRequest updateUserRequest, BindingResult bindingResult){
+        formValidation(bindingResult);
+        User user = findUser(userId);
+
+        String userFirstName = updateUserRequest.getUserFirstName();
+        if(userFirstName.isEmpty()){
+            userFirstName = user.getUserFirstName();
+        }
+
+        String userLastName = updateUserRequest.getUserLastName();
+        if(userLastName.isEmpty()){
+            userLastName = user.getUserLastName();
+        }
+
+        String userUserName = updateUserRequest.getUserUserName();
+        if(userUserName.isEmpty()){
+            userUserName = user.getUserUsername();
+        }
+        if(userRepository.existsByUserUsername(userUserName)){
+            throw new ConflictException("이미 존재하는 회원 이름입니다.");
+        };
+
+        String userPhone = updateUserRequest.getUserPhone();
+        if(userPhone.isEmpty()){
+            userPhone = user.getUserPhone();
+        }
+
+        UserGender userGender = user.getUserGender();
+        if(!updateUserRequest.getUserGender().isEmpty()){
+            userGender = enumGenderValid(updateUserRequest.getUserGender());
+        }
+
+        user.updateUser(userFirstName, userLastName, userUserName, userPhone, userGender);
+    }
+
     public void formValidation(BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new BadRequesetException("유효하지 않은 형식의 값입니다.");
@@ -130,5 +165,9 @@ public class UserService {
         } catch (Exception e) {
             throw new NotFoundException("존재하지 않는 성별입니다.");
         }
+    }
+
+    public User findUser(long userId){
+        return userRepository.findById(userId).orElseThrow(()-> new NotFoundException("존재하지 않는 회원입니다."));
     }
 }

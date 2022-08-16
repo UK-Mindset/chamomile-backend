@@ -39,6 +39,15 @@ public class User {
     @Column(name="user_birth")
     private LocalDate userBirth;
 
-    @Column(name="user_gender")
+    @Column(name="user_gender", nullable = false, columnDefinition = "CHAR(20)")
+    @Enumerated(EnumType.STRING)
     private UserGender userGender;
+
+    public void updateUser(String userFirstName, String userLastName, String userUsername, String userPhone, UserGender userGender){
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.userUsername = userUsername;
+        this.userPhone = userPhone;
+        this.userGender = userGender;
+    }
 }
