@@ -2,7 +2,9 @@ package com.kimsongnam.mindset.service;
 
 import com.kimsongnam.mindset.dto.request.*;
 import com.kimsongnam.mindset.dto.response.OnedayMoodResponse;
+import com.kimsongnam.mindset.dto.response.OnedayMoodStatisticsResponse;
 import com.kimsongnam.mindset.dto.response.RankMoodResponse;
+import com.kimsongnam.mindset.dto.response.UserTodayEmotionCountResponse;
 import com.kimsongnam.mindset.entity.mood.Mood;
 import com.kimsongnam.mindset.entity.mood.MoodCategory;
 import com.kimsongnam.mindset.entity.mood.MoodSituation;
@@ -139,6 +141,19 @@ public class MoodService {
         }
 
         return moodRepository.findOnedayMoodResponses(user, localDate);
+    }
+
+    @Transactional
+    public List<OnedayMoodStatisticsResponse> OnedayMoodStatistics(long userId, OnedayMoodStatisticsRequest onedayMoodStatisticsRequest, BindingResult bindingResult){
+        formValidation(bindingResult);
+        User user = findUser(userId);
+
+        UserTodayEmotionCountResponse userTodayEmotionCountResponse = moodRepository.findAllCount(user, onedayMoodStatisticsRequest.getMoodDate());
+        long count = userTodayEmotionCountResponse.getCount();
+        if(count==0){
+            count = 1;
+        }
+        return moodRepository.findOnedayMoodStatisticsResponses(user, onedayMoodStatisticsRequest.getMoodDate(), count);
     }
 
     public void formValidation(BindingResult bindingResult){
