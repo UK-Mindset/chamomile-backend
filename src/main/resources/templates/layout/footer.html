@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
+<th:block layout:fragment="footerFragment">
+    <div class="wrapper">
+        <div class="iconF home" style="margin-left: 26px;">
+            <a href="../home/home_main.html">
+                <img src="/img/footer/home_off.png" class="imgs homeImg">
+                <p class="textF textHome" style="margin-left: 2px;">Home</p>
+            </a>
+        </div>
+        <div class="iconF stats" style="margin-left: 93px;">
+            <a href="../stats/stats_main.html">
+                <img src="/img/footer/stats_off.png" class="imgs statsImg">
+                <p class="textF textStats" style="margin-left: 5px;">Stats</p>
+            </a>
+        </div>
+        <div class="mood" style="margin-left: 156px;">
+            <a href="../mood/choice-emotion.html">
+                <img src="/img/footer/mood.png" class="imgsMood">
+            </a>
+            <p class="textF" style="margin-left: 19px;">Mood</p>
+
+        </div>
+        <div class="iconF solution" style="margin-left: 252px;">
+            <a href="../solution/solution_main.html">
+                <img src="/img/footer/solution_off.png" class="imgs solutionImg">
+                <p class="textF textSolution" style="margin-left: -3px;">Solution</p>
+            </a>
+        </div>
+        <div class="iconF my" style="margin-left: 319px;">
+            <a href="../my/my_main.html">
+                <img src="/img/footer/my_off.png" class="imgs myImg">
+                <p class="textF textMy" style="margin-left: 9px;">My</p>
+            </a>
+        </div>
+    </div>
+</th:block>
+</html>

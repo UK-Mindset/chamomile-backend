@@ -1,0 +1,451 @@
+@font-face {
+    font-family:'SF Pro Display';
+    font-style:normal;
+    src:local('☺︎'), url("http://www.apple.com/wss/fonts/SF-Pro-Display/v1/sf-pro-display_ultralight.woff") format("woff"), url("http://www.apple.com/wss/fonts/SF-Pro-Display/v1/sf-pro-display_ultralight.ttf") format("truetype");
+    /* (C) 2015 Apple Inc. All rights reserved.*/
+  }
+
+/* Music Player Style */
+*,
+*:after,
+*:before {
+    box-sizing             : border-box;
+    -webkit-box-sizing     : border-box;
+    -moz-box-sizing        : border-box;
+    -webkit-font-smoothing : antialiased;
+    -moz-font-smoothing    : antialiased;
+    -o-font-smoothing      : antialiased;
+    font-smoothing         : antialiased;
+    text-rendering         : optimizeLegibility;
+
+}
+
+.mediPlayer .control {
+    opacity        : 0; /* transition: opacity .2s linear; */
+    pointer-events : none;
+    cursor         : pointer;
+}
+
+.mediPlayer .not-started .play, .mediPlayer .paused .play {
+    opacity : 1;
+
+}
+
+.mediPlayer .playing .pause {
+    opacity : 1;
+
+}
+
+.mediPlayer .playing .play {
+    opacity : 0;
+}
+
+.mediPlayer .ended .stop {
+    opacity        : 1;
+    pointer-events : none;
+}
+
+.mediPlayer .precache-bar .done {
+    opacity : 0;
+}
+
+.mediPlayer .not-started .progress-bar, .mediPlayer .ended .progress-bar {
+    display : none;
+}
+
+.mediPlayer .ended .progress-track {
+    stroke-opacity : 1;
+}
+
+.mediPlayer .progress-bar,
+.mediPlayer .precache-bar {
+    transition        : stroke-dashoffset 500ms;
+
+    stroke-dasharray  : 298.1371428256714;
+    stroke-dashoffset : 298.1371428256714;
+}
+
+/* Home Style */
+@media screen and (max-width: 720px){
+    
+    .textHome{
+        color: #8B82FF;
+    }
+
+    /*.homeImg{*/
+    /*    content:url("/img/footer/home_on.png");*/
+    /*}*/
+    /* purple part CSS */
+    .header{
+        margin-top: -15px;
+    }
+    .purple{
+        background-color: #8B82FF;
+        margin: -8px;
+        width: 375px;
+        height: 260px;
+    }
+    .greet{
+        position: relative;
+        top:88px;
+        left: 20px;
+    }
+    .greetingsB{
+        color: #FFFFFF;
+        font-family: 'SF Pro Display';
+        font-weight: 600;
+        font-size: 28px;
+        margin-top: 0%;
+        margin-bottom: 1%;
+    }
+    .greetingsS{
+        color: #FFFFFF;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 13px;
+        margin: 0%;
+    }
+    .mediPlayer{
+        position: absolute;
+        top: 46px;
+        margin-left: 16px;
+    }
+    .bgm{
+        font-family: 'SF Pro display';
+        font-weight: 200;
+        font-size: 13px;
+        color:#FFFFFF;
+        position: relative;
+        top: 58px;
+        margin-left: 50px;
+    }
+    .search{
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        left: 301px;
+        top: 54px;
+    }
+    .profile{
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        left: 335px;
+        top: 54px;
+
+    }
+    .moon{
+        position: absolute;
+        top: 80px;
+        left: 210px;
+        margin: 0%;
+        width: 158px;
+        height: 176px;
+    }
+
+
+/* Quick actions CSS */
+    .white{
+        position: absolute;
+        width: 376px;
+        height: 1075px;
+        left: 0px;
+        top: 235px;
+        background: #FFFFFF;
+        border-radius: 30px 30px 0px 0px;
+        
+    }
+    .titleQ{
+        position: absolute;
+        font-family: 'SF Pro Display';
+        font-weight: 600;
+        font-size: 17px;
+        left: 16px;
+        top: 20px;
+        margin: 0%
+    }
+    .imgsQ{
+        position: absolute;
+        width: 34px;
+        height: 34.09px;
+        top: 70px;
+    }
+    .textQ{
+        position: absolute;
+        width: 41px;
+        top: 114px;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 13px;
+        margin: 0%;
+        color: #191919;
+    }
+
+
+    /* Today Css */
+    .today{
+        margin: 0%;
+        position: absolute;
+        width: 38px;
+        height: 18px;
+        left: 16px;
+        top: 170px;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 15px;
+        color: #191919;
+
+    }
+    .myMood{
+        position: absolute;
+        width: 342px;
+        height: 214px;
+        left: 16px;
+        top: 198px;
+        background: #F8F7FC;
+        border-radius: 20px;
+    }
+    .myMoodT{
+        margin: 0%;
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        font-family: 'SF Pro Display';
+        font-weight: 600;
+        font-size: 17px;
+        color: #191919;
+    }
+    .moreT{
+        margin: 0%;
+        position: absolute;
+        width: 25px;
+        height: 18px;
+        left: 294px;
+        top: 17px;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 15px;
+        color: #8B82FF;
+    }
+        /* Today ProgressBar */
+
+            /* ProgressBar Public Setting*/
+        .zt-skill-bar{
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+                -ms-border-radius: 100px;
+                    border-radius: 100px;
+
+        }
+        .zt-skill-bar * {
+            webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+                -o-transition: all 0.5s ease;
+                transition: all 0.5s ease;
+                -webkit-border-radius: 100px;
+                -moz-border-radius: 100px;
+                    -ms-border-radius: 100px;
+                        border-radius: 100px;
+        }
+        /* ProgressBar Public Setting */
+
+    .zt-span6.last{
+        position: absolute;
+        top: 40px;
+        left: 10px;
+    }
+    #todayProgress{
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 17px;
+        height: 40px;
+        width: 312px;
+        margin-bottom: 10px;
+        background-color: #FFFFFF;
+    }
+
+    .zt-skill-bar .moodPer {
+        position: relative;
+        width: 312px;
+        height:40px;
+        margin: 0%;
+    }
+    .moodTitle{
+        position: absolute;
+        left: 43px;
+        top: 11px;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 17px;
+        color: #352CA7;
+    }
+    .emoji{
+        position: relative;
+        margin: 0%;
+        top: 6px;
+        left: 8px;
+        width: 26px;
+        height: 26px;
+    }
+    .moodperT{
+         position: absolute;
+         left: 263px;
+         top: 11px;
+    }
+
+
+    /* SoundTherapy CSS */
+    .soundTherapy{
+        position: absolute;
+        left: 17px;
+        top: 442px;
+        font-family: 'SF Pro Display';
+        font-weight: 600;
+        font-size: 17px;
+        color: #191919;
+    }
+    .moreS{
+        position: absolute;
+        width: 33px;
+        height: 18px;
+        left: 311px;
+        top: 444px;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 15px;
+        color: #8B82FF;
+    }
+    .arrowS{
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        left: 349px;
+        top: 462px;
+
+    }
+    .wrapSt{
+        max-width: 375px;
+    }
+    .scrollColumn{
+        overflow-x:scroll;
+        white-space:nowrap;
+    }
+    .st{
+        display:inline-block;
+        width: 130px;
+        height: 130px;
+        margin-top: 486px;
+        filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.05));
+        margin-right: -10px;
+    }
+    
+    .underbox{
+        position: absolute;
+        width: 375px;
+        height: 8px;
+        left: 0px;
+        top: 666px;
+        background: #EFEFEF;
+    }
+    
+
+    /* Challenges in progress */
+    .challengeP{
+        position: absolute;
+        left: 16px;
+        top: 674px;
+        font-family: 'SF Pro Display';
+        font-weight: 600;
+        font-size: 17px;
+        color: #191919;
+    }
+    .moreC{
+        position: absolute;
+        width: 33px;
+        height: 18px;
+        left: 311px;
+        top: 674px;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 15px;
+        color: #8B82FF;
+    }
+    .arrowC{
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        left: 349px;
+        top: 692px;
+    }
+    .wrapCP{
+        max-width: 375px;
+    }
+    .challengeBox{
+        display: inline-block;
+        width: 200px;
+        height: 220px;
+        margin-top: 120px;
+        filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.05));
+    }
+    .imgC{
+        position: absolute;
+        width: 200px;
+        height: 122px;
+        margin: 0%;
+    }
+    .infoC{
+        position: absolute;
+        width: 200px;
+        height: 98px;
+        top: 122px;
+        margin: 0%;
+        background: #FFFFFF;
+        border-radius: 0px 0px 20px 20px;
+    }
+    .titleCP{
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 15px;
+        color: #191919;
+        margin: 0%;
+    }
+    .zt-span6.last{
+        position: relative;
+        width: 180px;
+        height: 4px;
+        margin: 0%;
+        background-color: #F8F7FC;;
+    }
+
+    .zt-skill-bar .chellangePer {
+        position: relative;
+        width: 180px;
+        height: 4px;
+        margin: 0%;
+    }
+    .successCount{
+        position: absolute;
+        left: 10px;
+        top: 49px;
+        margin: 0%;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 10px;
+        color: #D2D6DF;
+    }
+    .startCP{
+        position: absolute;
+        width: 72px;
+        height: 28px;
+        left: 119px;
+        top: 62px;
+    }
+    
+    
+    
+    
+}
